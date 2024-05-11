@@ -18,10 +18,7 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SDK\pcsx2_package.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SDK\core_package.cpp">
+    <ClCompile Include="..\..\CDK.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

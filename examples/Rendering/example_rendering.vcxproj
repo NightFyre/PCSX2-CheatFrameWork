@@ -120,11 +120,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\lib\imgui\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ForceFileOutput>
+      </ForceFileOutput>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -135,18 +137,26 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\lib\imgui\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ForceFileOutput>
+      </ForceFileOutput>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\SDK\core_package.cpp" />
-    <ClCompile Include="..\..\SDK\pcsx2_package.cpp" />
+    <ClCompile Include="..\..\CDK.cpp" />
+    <ClCompile Include="..\..\lib\imgui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\..\lib\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\..\lib\imgui\imgui.cpp" />
+    <ClCompile Include="..\..\lib\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\..\lib\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\..\lib\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\..\lib\imgui\imgui_widgets.cpp" />
     <ClCompile Include="dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>

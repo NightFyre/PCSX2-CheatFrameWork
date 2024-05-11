@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\lib\imgui\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,7 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\lib\imgui\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,8 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\CDK\core_package.cpp" />
-    <ClCompile Include="..\..\CDK\pcsx2_package.cpp" />
+    <ClCompile Include="..\..\CDK.cpp" />
     <ClCompile Include="..\..\lib\PlayStation2-Game-SDKs\SOCOM U.S Navy Seals\SOCOM1_package.cpp" />
     <ClCompile Include="dllmain.cpp" />
   </ItemGroup>

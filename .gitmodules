@@ -1,3 +1,6 @@
 [submodule "lib/PlayStation2-Game-SDKs"]
 	path = lib/PlayStation2-Game-SDKs
 	url = https://github.com/NightFyre/PlayStation2-Game-SDKs
+[submodule "lib/imgui"]
+	path = lib/imgui
+	url = https://github.com/ocornut/imgui

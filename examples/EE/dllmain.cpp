@@ -1,9 +1,9 @@
 #pragma once
-#include "pch.h"
+#include <CDK.h>
 
 static bool g_running;
 
-#define fn_start 0x0        //  should be function start address 
+#define fn_start 0x0             //  should be function start address 
 
 //---------------------------------------------------------------------------------------------------
 //  Initialize Client Thread
@@ -32,20 +32,20 @@ DWORD WINAPI MainThread(LPVOID hInstance)
         do
         {
             //  Exit Module
-            if (GetAsyncKeyState(VK_END) & 0x8000)
+            if (PlayStation2::Tools::GetKeyState(VK_END, 500))
                 g_running = false;
          
-            if (PlayStation2::PCSX2::o_recResetEE <= 0)
-                continue;
+            //  if (PlayStation2::PCSX2::o_recResetEE <= 0)
+            //      continue;
 
             //  Recompile EE , can be used to capture a functions compilation. May need to trigger an event of sorts in game. YMMV
-            if (GetAsyncKeyState(VK_HOME) & 0x8000)
+            if (PlayStation2::Tools::GetKeyState(VK_HOME, 500))
                 PlayStation2::PCSX2::ResetEE();
 
             if (fn_start <= 0)
                 continue;
 
-            //  Capture EE Function Compilation
+            //  Capture EE Instruction Interpretation
             if (PlayStation2::PCSX2::g_cpuRegs->pc == fn_start)
             {
                 using namespace PlayStation2;

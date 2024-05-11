@@ -13,16 +13,40 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\ImGui">
+      <UniqueIdentifier>{e8547d02-5d5d-4768-9510-e44e0784cf47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ImGui\backends">
+      <UniqueIdentifier>{5c2542ed-948b-4122-bd2e-27c6bfaf77a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SDK\pcsx2_package.cpp">
+    <ClCompile Include="..\..\CDK.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SDK\core_package.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="..\..\lib\imgui\imgui_widgets.cpp">
+      <Filter>Resource Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\imgui\imgui.cpp">
+      <Filter>Resource Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\imgui\imgui_demo.cpp">
+      <Filter>Resource Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\imgui\imgui_draw.cpp">
+      <Filter>Resource Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\imgui\imgui_tables.cpp">
+      <Filter>Resource Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\imgui\backends\imgui_impl_dx11.cpp">
+      <Filter>Resource Files\ImGui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\imgui\backends\imgui_impl_win32.cpp">
+      <Filter>Resource Files\ImGui\backends</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

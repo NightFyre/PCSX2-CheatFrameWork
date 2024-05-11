@@ -15,16 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\CDK\pcsx2_package.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\CDK\core_package.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\PlayStation2-Game-SDKs\SOCOM U.S Navy Seals\SOCOM1_package.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CDK.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

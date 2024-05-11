@@ -1,7 +1,9 @@
 #pragma once
-#include "pch.h"
+#include <CDK.h>
 
 static bool g_running;
+
+#define offset 0x1000
 
 //---------------------------------------------------------------------------------------------------
 //  Initialize Client Thread
@@ -17,41 +19,33 @@ DWORD WINAPI MainThread(LPVOID hInstance)
     //  initialize pcsx2 cheat dev kit
     if (PlayStation2::InitCDK())
     {                
-        using namespace PlayStation2;
-
-
-        Tools::CPUTimer t;
+        PlayStation2::Tools::CPUTimer t;
 
         //  -   Get PCSX2 Module Base
-        const auto pcsx2ModuleBase = Memory::GetModuleBase();
-        Console::LogMsg("[+][%.3f][Memory::GetModuleBase] 0x%llX\n", t.GetElapsedTime(clock()), pcsx2ModuleBase);
+        const auto pcsx2ModuleBase = PlayStation2::Memory::GetModuleBase();
+        PlayStation2::Console::LogMsg("[+][%.3f][Memory::GetModuleBase] 0x%llX\n", t.GetElapsedTime(clock()), pcsx2ModuleBase);
 
-        //  -   Read 8 bytes from module base address
-        long long result = Memory::ReadMemoryEx<long long>(pcsx2ModuleBase);
-        Console::LogMsg("[+][%.3f][Memory::ReadMemoryEx] 0x%llX\n", t.GetElapsedTime(clock()), result);
+        //  -   Read 4 bytes from module base address
+        const auto result = PlayStation2::Memory::ReadMemoryEx<__int32>(pcsx2ModuleBase);
+        PlayStation2::Console::LogMsg("[+][%.3f][Memory::ReadMemoryEx] 0x%8X\n", t.GetElapsedTime(clock()), result);
 
         //  -   Get EE Memory Module Base ( ps2 game ram )
-        const auto eeModuleBase = PS2Memory::GetModuleBase();
-        Console::LogMsg("[+][%.3f][PS2Memory::GetModuleBase] 0x%llX\n", t.GetElapsedTime(clock()), eeModuleBase);
+        const auto eeModuleBase = PlayStation2::PS2Memory::GetModuleBase();
+        PlayStation2::Console::LogMsg("[+][%.3f][PS2Memory::GetModuleBase] 0x%llX\n", t.GetElapsedTime(clock()), eeModuleBase);
 
         //  -   retrieve an offsets virtual address in memory
-        long long offsetAddress = PS2Memory::GetAddr(0x1000);
-        Console::LogMsg("[+][%.3f][PS2Memory::GetAddr] 0x%llX\n", t.GetElapsedTime(clock()), offsetAddress);
+        const auto offsetAddress = PlayStation2::PS2Memory::GetAddr(offset);
+        PlayStation2::Console::LogMsg("[+][%.3f][PS2Memory::GetAddr] 0x%llX\n", t.GetElapsedTime(clock()), offsetAddress);
 
-        //  -   read 8 bytes from the offset virtual address obtained in the previous step
-        auto read_result_long = PS2Memory::ReadLong<long long>(offsetAddress);
-        Console::LogMsg("[+][%.3f][PS2Memory::ReadLong] 0x%llX\n", t.GetElapsedTime(clock()), read_result_long);
-
-        //  -   read 8 bytes from a virtual address in memory using a games offset
-        auto read_result_short = PS2Memory::ReadShort<long long>(0x2000);
-        Console::LogMsg("[+][%.3f][PS2Memory::ReadShort] 0x%llX\n", t.GetElapsedTime(clock()), read_result_short);
-
+        //  -   read 4 bytes from a virtual address in memory using a games offset
+        const auto readResultShort = PlayStation2::PS2Memory::ReadShort<__int32>(offset);
+        PlayStation2::Console::LogMsg("[+][%.3f][PS2Memory::ReadShort] 0x%8X\n", t.GetElapsedTime(clock()), readResultShort);
 
         //  -   Obtain basic process information such as PID, handle, base address & window information
-        ProcessInfo pInfo;
-        Memory::ObtainProcessInfo(pInfo);
-        Console::LogMsg("[+][%.3f][Memory::ObtainProcessInfo]\n- PID:\t\t0x%X\n- PATH:\t\t%s\n- HWND:\t\t0x%X\n- TITLE:\t%s\n\n",
-            t.Stop(Tools::CPUTimer::ETimings::ETiming_MS),
+        PlayStation2::ProcessInfo pInfo;
+        PlayStation2::Memory::ObtainProcessInfo(pInfo);
+        PlayStation2::Console::LogMsg("[+][%.3f][Memory::ObtainProcessInfo]\n- PID:\t\t0x%X\n- PATH:\t\t%s\n- HWND:\t\t0x%X\n- TITLE:\t%s\n\n",
+            t.Stop(PlayStation2::Tools::CPUTimer::ETimings::ETiming_MS),
             pInfo.m_ModulePID,                              //  
             pInfo.m_ModulePath.c_str(),                     //  
             pInfo.m_GameWindow,                             //  Might be console window
@@ -64,7 +58,7 @@ DWORD WINAPI MainThread(LPVOID hInstance)
         do
         {
             //  Exit Module
-            if (GetAsyncKeyState(VK_END) & 0x8000)
+            if (PlayStation2::Tools::GetKeyState(VK_END, 500))
                 g_running = false;
 
         } while (g_running);
@@ -87,15 +81,15 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  dwCallReason, LPVOID x)
 
     if (dwCallReason == DLL_PROCESS_ATTACH)
     {
-        
+
         DisableThreadLibraryCalls(hModule);
-        
+
         HANDLE pHand = CreateThread(0, 0, MainThread, hModule, 0, 0);
-    
+
         if (pHand)
             CloseHandle(pHand);
-    
+
     }
-    
+
     return TRUE;
 }
